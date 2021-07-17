@@ -12,8 +12,6 @@ export function receiveQuestions(questions) {
     }
 }
 
-
-
 function addQuestion({ id, timestamp, author, optionOne, optionTwo }) {
     return {
         type: ADD_QUESTION,
@@ -35,9 +33,6 @@ export function handleAddQuestion(optionOneText, optionTwoText) {
             optionTwoText,
             author: authedUser
         }
-
-        //dispatching this here and not after api success cause of frequent error in creating question
-        //dispatch(addQuestion(formatNewQuestion(questionInfo)))
 
         return saveQuestion(questionInfo)
             .then((question) => {

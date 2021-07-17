@@ -1,12 +1,27 @@
-# Would You Rather Project
+# “Would You Rather?” Project
 
-This is the starter code for the final assessment project for Udacity's React & Redux course.
+This is the final assessment project for Udacity's React-Redux course, which is a part of the [React Nanodegree program](https://www.udacity.com/course/react-nanodegree--nd019).
 
-The `_DATA.js` file represents a fake database and methods that let you access the data. The only thing you need to edit in the ` _DATA.js` file is the value of `avatarURL`. Each user should have an avatar, so you’ll need to add the path to each user’s avatar.
+This is a web app that lets a user play the “Would You Rather?” game. The game goes like this:
+A user is asked a question in the form: “Would you rather [option A] or [option B] ?”. Answering "neither" or "both" is against the rules.
 
-Using the provided starter code, you'll build a React/Redux front end for the application. We recommend using the [Create React App](https://github.com/facebook/create-react-app) to bootstrap the project.
+In this app, users are able to ask and answer questions, see which questions they have/haven’t answered, see how other people have voted, and see the ranking of users on the leaderboard.
+
+Once the user logs in, the user is able to toggle between his/her answered and unanswered polls on the home page. The polls in both categories are arranged from the most recently created (top) to the least recently created (bottom).
+
+Upon voting in a poll, all of the information of an answered poll is displayed. The user’s response is recorded and clearly visible on the poll details page. Users can only vote once per poll; they are not allowed to change their answer after they’ve voted. When the user comes back to the home page, the polling question appears in the “Answered” column.
+
+
+## Technologies used:
+
+-   React
+-   Redux
+-   React Router
+-   React-Bootstrap
 
 ## Data
+
+The `_DATA.js` file represents a fake database and methods that let you access the data. The only thing you need to edit in the ` _DATA.js` file is the value of `avatarURL`. Each user should have an avatar, so you’ll need to add the path to each user’s avatar.
 
 There are two types of objects stored in our database:
 
@@ -95,6 +110,10 @@ Your code will talk to the database via 4 methods:
 | qid | String | The id of the question that was answered|
 | answer | String | The option the user selected. The value should be either `"optionOne"` or `"optionTwo"`|
 
-## Contributing
+## Note
 
-This repository is the starter code for *all* Udacity students. Therefore, we most likely will not accept pull requests. For details, check out [CONTRIBUTING.md](https://github.com/udacity/reactnd-project-would-you-rather-starter/blob/master/CONTRIBUTING.md).
+This project uses a fake backend, so the state will not persit across refreshes.
+
+## Create React App
+
+This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app) 

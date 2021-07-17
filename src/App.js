@@ -6,6 +6,7 @@ import Nav from './components/Nav'
 import NotFound from './components/NotFound'
 import NewQuestion from './components/NewQuestion'
 import ProtectedRoute from './components/ProtectedRoute'
+import QuestionDetail from './components/QuestionDetail'
 
 import Dashboard from './containers/Dashboard'
 import Leaderboard from './containers/Leaderboard'
@@ -16,6 +17,7 @@ class App extends Component {
     const { dispatch } = this.props
     dispatch(handleInitialData())
   }
+  
 
   render() {
   return (
@@ -28,6 +30,7 @@ class App extends Component {
 									<Route path="/" exact component={Login}/>
 									<ProtectedRoute path='/dashboard' exact component={Dashboard} />
                   <ProtectedRoute path='/add' exact component={NewQuestion} />
+                  <ProtectedRoute path='/question/:id' component={QuestionDetail} />
 									<ProtectedRoute path='/leaderboard' component={Leaderboard} />
 									<Route path="/not-found" component={NotFound} />
 								</Switch>
