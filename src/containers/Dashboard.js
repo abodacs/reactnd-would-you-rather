@@ -2,7 +2,7 @@ import React, { Component, Fragment} from 'react'
 import { connect } from 'react-redux'
 import Tab from 'react-bootstrap/Tab'
 import Tabs from 'react-bootstrap/Tabs'
-import QuestionsList from '../components/QuestionsList';
+import QuestionsList from '../components/poll/QuestionsList';
 
 class Dashboard extends Component {     
     state = {
