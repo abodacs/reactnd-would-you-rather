@@ -24,7 +24,7 @@ class Question extends Component {
 						</Card.Header>
 						<Card.Body className="text-center">
 							<Card.Text>{optionOne.text.slice(0, 50)}...?</Card.Text>
-							<Link to={`/question/${id}`}>
+							<Link to={`/questions/${id}`}>
 								<Button variant="outline-dark">View Poll</Button>
 							</Link>
 						</Card.Body>
