@@ -1,7 +1,8 @@
-import React, { Component } from 'react'
+import React, { Component, Fragment} from 'react'
 import { connect } from 'react-redux'
-import { Link } from 'react-router-dom'
-import Question from '../components/Question'
+import Tab from 'react-bootstrap/Tab'
+import Tabs from 'react-bootstrap/Tabs'
+import QuestionsList from '../components/QuestionsList';
 
 class Dashboard extends Component {     
     state = {
@@ -14,45 +15,42 @@ class Dashboard extends Component {
         
     }
     render() {
-        const { showAnswered } = this.state;
-        const { questions, authedUser } = this.props
-        const questionsArray = Object.values(questions)
-        const filteredQuestions = questionsArray.filter(function(question) {
-            const isUserVoted = (
-                question.optionOne.votes.indexOf(authedUser) > -1 ||
-                question.optionTwo.votes.indexOf(authedUser) > -1
-            );
-            return showAnswered ? isUserVoted : !isUserVoted;
-        });
-
-        const sortedQuestions = filteredQuestions.sort((a, b) => b.timestamp - a.timestamp);
+        const { answeredQuestionIds, unansweredQuestionIds } = this.props;
 
         return (
-            <div>
-               <div className="btn-group">
-                    <button className={ !showAnswered ? 'btn-selected' : 'btn-default'} onClick={(e) => this.filterQuestions(false)}>Unanswered Questions</button>
-                    <button className={ showAnswered ? 'btn-selected' : 'btn-default'} onClick={(e) => this.filterQuestions(true)}>Answered Questions</button>
-                </div>
-                <ul className="questions-list">
-                    {sortedQuestions.map((question) => (
-                        <li key={question.id}>
-                            <Link to={`question/${question['id']}`}>
-                                <Question id={question.id}/>
-                            </Link>
-                        </li>
-                    ))}
-                </ul>
-            
-            </div>
+            <Fragment>
+                <Tabs defaultActiveKey="unanswered" className="mb-3">
+                    <Tab eventKey="unanswered" title="Unanswered Questions">
+                        <QuestionsList
+                            idsList={unansweredQuestionIds}
+                            emptyListNote="Time to create some new ones! "
+                        />
+                    </Tab>
+                    <Tab eventKey="answered" title="Answered Questions">
+                        <QuestionsList
+                            idsList={answeredQuestionIds}
+                            emptyListNote="What are you waiting for???"
+                        />
+                    </Tab>
+                </Tabs>
+            </Fragment>            
         )
     }
 }
 
-function mapStateToProps( { questions, authedUser }) {
-    return {
-        authedUser,
-        questions,
-    }
+function mapStateToProps( { questions, users, authedUser }) {
+    const answeredQuestionIds = Object.keys(questions)
+		.filter((id) => users[authedUser].answers.hasOwnProperty(id))
+		.sort((a, b) => questions[b].timestamp - questions[a].timestamp);
+
+	const unansweredQuestionIds = Object.keys(questions)
+		.filter((id) => !users[authedUser].answers.hasOwnProperty(id))
+		.sort((a, b) => questions[b].timestamp - questions[a].timestamp);
+
+	return {
+		answeredQuestionIds,
+		unansweredQuestionIds
+	};
 }
 
 export default connect(mapStateToProps)(Dashboard);

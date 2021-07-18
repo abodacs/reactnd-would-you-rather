@@ -1,8 +1,9 @@
-import React, { Component, Fragment } from 'react'
+import React, { Component } from 'react'
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom'
+import Container from 'react-bootstrap/Container';
 import { connect } from 'react-redux'
 import { handleInitialData } from './actions/shared'
-import Nav from './components/Nav'
+import NavigationBar from './components/NavigationBar'
 import NotFound from './components/NotFound'
 import NewQuestion from './components/NewQuestion'
 import ProtectedRoute from './components/ProtectedRoute'
@@ -22,10 +23,9 @@ class App extends Component {
   render() {
   return (
     <Router>
-      <Fragment>
-          <div className='container'>
-          <Nav />
-							<div className="main-content"> 
+      <Container>
+              <NavigationBar />
+							<main>
 								<Switch>
 									<Route path="/" exact component={Login}/>
 									<ProtectedRoute path='/dashboard' exact component={Dashboard} />
@@ -34,10 +34,8 @@ class App extends Component {
 									<ProtectedRoute path='/leaderboard' component={Leaderboard} />
 									<Route path="/not-found" component={NotFound} />
 								</Switch>
-							</div>
-
-          </div>
-      </Fragment>
+              </main>
+      </Container>
     </Router>
   );
   }
